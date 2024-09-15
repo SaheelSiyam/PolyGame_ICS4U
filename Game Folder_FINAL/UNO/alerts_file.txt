@@ -1,0 +1,32 @@
+Lines 2-5: Color Messages (These only occur for new-color effects)
+Current Color: Red
+Current Color: Yellow
+Current Color: Green
+Current Color: Blue
+Lines 7-11: Effects on you
+Effect: Draw 4
+Effect: Color Change!
+Effect: Draw 2
+Effect: Skip
+Effect: Reverse
+Lines 13-19: Stat Banner
+Stat Banner: 
+Your Hand: 
+AI Hand:
+Draw Pile:
+Discard Pile: 
+Total Cards: 56
+Choose a color below: 
+Lines 21-23: Admin
+Your Turn: Play a card
+AI Turn: Wait for your turn
+INVALID CARD! TRY AGAIN
+NO MATCHING CARDS! DRAWING A CARD
+Effect On Card Has Expired
+Choose a color! Click a button at left
+Lines 28-32: Effects on AI (use this list if turn == ai)
+Effect: AI is Drawing 4
+Effect: Color Change on AI
+Effect: AI is Drawing 2 
+Effect: AI Turn Skipped
+Effect: Reverse

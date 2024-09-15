@@ -22,7 +22,6 @@ class UnoGame():
 
         self.new_color = "no"
         
-        print(self.deck)
 
     def get_game_status(self):
         return self.game_status
@@ -52,29 +51,48 @@ class UnoGame():
         self.new_color = new_color
 
 
+
+
+    #New_color is a flag for wild card abilities.
+    def get_discard_pile(self):
+        return self.discard_pile
+
+    def get_draw_pile(self):
+        return self.draw_pile
+   
+
+
+        
+
     #returns a card from the draw pile,
     def draw_card(self):
-        return self.draw_pile.pop()
 
-    
+        #Checks if draw pile runs out in the middle of a draw
+        #empty lists evaluate to None
+        if self.draw_pile == None or len(self.draw_pile) == 0:
+            print("No cards remaining in draw pile! Shuffling discard pile")
+            
+            self.draw_pile = random.shuffle(self.discard_pile)
+            self.discard_pile = []
+        card = self.draw_pile.pop()
+        if card[2] == False:
+            card[2] = True
+        return card
+  
     #discards a card
     def discard_card(self, card):
         self.discard_pile.insert(0, card)
     
-
-        
     #Call a menu function when the GUI development starts
     def startup(self):
         #calls the menu
         print("MENU")
 
-
     #On start button clicked
     def start_clicked(self):
         self.game_status = True
         self.turn = "you"
-    
-             
+                 
     def create_deck(self):
         
         #print("TEST")
@@ -130,10 +148,10 @@ class UnoGame():
     def turn_checks(self, your_hand, ai_hand):
         
          #Checks if draw pile runs out
-        if len(self.draw_pile) == 0:
+        if self.draw_pile == None:
             print("No cards remaining in draw pile! Shuffling discard pile")
             
-            start_pile = random.shuffle(self.discard_pile)
+            self.draw_pile = random.shuffle(self.discard_pile)
             self.discard_pile = []
 
         
@@ -147,7 +165,6 @@ class UnoGame():
         print(f"\nCurrent card: {self.current_card}")
 
         
-    
     def setup(self):
          #options
     
@@ -297,12 +314,11 @@ class AIPlayer():
             return card_to_discard, new_color
             
             
-'''           
+'''       
 class HarderAIPlayer(AIPlayer):
     def __init__(self, hand):
-    super().__init__(self, hand)
+        super().__init__(self, hand)
 '''
-    
 
 class Player():
     
@@ -313,7 +329,6 @@ class Player():
         
         self.hand = hand
         
-
     '''
     def get_user_data(self):
         #Search through file for user data, add upgrades before game, etc
@@ -348,41 +363,26 @@ class Player():
     
 
     #Once you have a list of valid cards that is NOT: NONE    
-    def your_turn(self, valid_cards, current_card, new_color):
+    def your_turn(self, index, current_card, new_color):
 
         #changing the card back to black, once the validity check is over
         if new_color != "no":
             current_card[1] = "black"
-        
-        print('\n')
-        for index in valid_cards:
-            print(f"Card number {index+1} is valid")
-        #Lets you choose a VALID card as a number.
-        #The cards are ordered in the list
 
-        choice_valid = False
-        print('\n')
-        # -1 because of index starting at 0
-        choice = (int(input("Choose a card number: ")))-1
-        
-        if choice in valid_cards:
-            choice_valid = True
-            
-        while not choice_valid:
-            choice = int(input("\nChoose a valid card number: "))
-            
-            if choice in valid_cards:
-                choice_valid = True
-
-                
-        card_to_discard = self.hand.pop(choice)
+        print(index)
+        print(self.hand)
+        card_to_discard = self.hand.pop(index)
         print(f"You chose: {card_to_discard}")
-
+        
         #Lets user choose a color if the card drawn is black.
         #The exported card becomes a "draw 4" or a "color change" 
         if card_to_discard[1] == "black":
 
-            
+            #code = "CHA"
+            #return code
+
+
+                        
             choice_valid = False
             print('\n')
             chosen_color = input("Choose a color (red, yellow, green, blue) CASE AND SPELLING SENSITIVE!: ")
@@ -394,7 +394,7 @@ class Player():
                 
                 
             while not choice_valid:
-                choice = int(input("Choose a VALID color (red, yellow, green, blue) CASE AND SPELLING SENSITIVE!: "))
+                choice = input("Choose a VALID color (red, yellow, green, blue) CASE AND SPELLING SENSITIVE!: ")
                 
                 if choice in colors:
                     choice_valid = True
@@ -403,6 +403,8 @@ class Player():
            
             
             print(f"You have chosen the color: {chosen_color}")
+
+            
             
         else:
             new_color = "no"  
