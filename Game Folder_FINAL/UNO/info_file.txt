@@ -1,0 +1,9 @@
+INFO/RULES
+1. Match the color or face value of the card present'
+2. If you have no matching cards, draw a card
+3. If your opponent places a black card, your turn is skipped
+4. If you have only one card, you must press the UNO button by the end of your turn.
+If you fail to do so, draw 2 cards
+5. Draw 2 cards if you press UNO when you have more than one card
+6. The first person (or AI) to have an empty hand wins
+May the best player win!
